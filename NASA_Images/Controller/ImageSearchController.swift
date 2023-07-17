@@ -10,16 +10,43 @@ import SDWebImage
 
 private let reuseIdentifier = "Cell"
 
-class ImageSearchController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class ImageSearchController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     fileprivate var searchItems = [SearchItem]()
     fileprivate var imageGroups = [(imageTitle: String, imageData: SearchItem)]()
-
-
+    fileprivate let searchContoller = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupSearchBar()
         self.collectionView!.register(SearchResultsCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        self.fetchMedia()
+        self.fetchImages(searchTerm: "hubble")
+    }
+    
+    func setupSearchBar() {
+        definesPresentationContext = true
+        navigationItem.searchController = self.searchContoller
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchContoller.searchBar.delegate = self
+    }
+    
+    var timer: Timer?
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchText)
+        // need search throttling (delay)
+        timer?.invalidate()
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { (_) in
+            Service.shared.fetchImages(searchTerm: searchText) { response, error in
+                self.imageGroups = response
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            }
+        })
+
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -38,22 +65,27 @@ class ImageSearchController: UICollectionViewController, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: (view.frame.width/2) - 20, height: 320)
+        let cellWidth = (view.frame.width/2) - 20
+        return .init(width: cellWidth, height: 320)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return .init(top: 10, left: 10, bottom: 10, right: 10)
     }
     
-    func fetchMedia() {
-        Service.shared.fetchMedia(searchTerm: "Apollo 11") { searchItems, err in
-            if let err = err {
-                print("Failed to fetch media, ", err)
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Item Selected: \(indexPath.item)")
+    }
+    
+    func fetchImages(searchTerm: String) {
+        Service.shared.fetchImages(searchTerm: searchTerm) { groups, error in
+            if let error = error {
+                print("Failed to fetch media, ", error)
                 return
             }
-            self.searchItems = searchItems
-            self.populateByTitle()
-
+            self.imageGroups = groups
+            
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
@@ -113,7 +145,7 @@ class ImageSearchController: UICollectionViewController, UICollectionViewDelegat
         }
         
         self.imageGroups = resultsByTitleHolder
-        self.printImageGroupData()
+       // self.printImageGroupData()
     }
     
     fileprivate func printImageGroupData() {
