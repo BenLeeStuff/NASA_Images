@@ -12,6 +12,7 @@ class SearchResultsCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let iv = UIImageView()
         iv.backgroundColor = .blue
+        iv.contentMode = .scaleAspectFit
         iv.layer.cornerRadius = 10
         iv.clipsToBounds = true
         return iv

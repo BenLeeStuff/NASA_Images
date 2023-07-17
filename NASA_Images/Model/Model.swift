@@ -20,11 +20,12 @@ struct SearchCollection: Codable {
 
 struct SearchItem: Codable {
     let href: String
-    let data: [SearchResult]
+    var data: [SearchResult]
     var links: [SearchResultLink]?
 }
 
 struct SearchResult: Codable {
+    var album: [String]?
     let title: String
     let keywords: [String]
     let nasa_id: String
