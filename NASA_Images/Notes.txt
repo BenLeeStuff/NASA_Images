@@ -1,0 +1,5 @@
+
+Next Tasks To Do:
+
+1. Dynamic height cell implementation.
+

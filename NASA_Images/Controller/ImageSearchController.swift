@@ -46,7 +46,6 @@ class ImageSearchController: UICollectionViewController, UICollectionViewDelegat
                 }
             }
         })
-
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -76,6 +75,9 @@ class ImageSearchController: UICollectionViewController, UICollectionViewDelegat
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Item Selected: \(indexPath.item)")
+        let imageGroup = imageGroups[indexPath.item]
+        let detailsController = ImageDetailsController()
+        navigationController?.pushViewController(ImageDetailsController(), animated: true)
     }
     
     func fetchImages(searchTerm: String) {
@@ -92,6 +94,8 @@ class ImageSearchController: UICollectionViewController, UICollectionViewDelegat
             print("Finished fetching images from ImageSearchController")
         }
     }
+    
+
     
     fileprivate func printSearchResults() {
         print("Total searchItems count: ",searchItems.count)

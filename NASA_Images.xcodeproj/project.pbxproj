@@ -22,6 +22,9 @@
 		B5A3E1D62A5E3DAE00A39617 /* VerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E1D52A5E3DAE00A39617 /* VerticalStackView.swift */; };
 		B5A3E1D82A5E4FAD00A39617 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E1D72A5E4FAD00A39617 /* Model.swift */; };
 		B5A3E2172A65E5E600A39617 /* ImageDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E2162A65E5E600A39617 /* ImageDetailsController.swift */; };
+		B5A3E2192A688CFE00A39617 /* Notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = B5A3E2182A688CFE00A39617 /* Notes.txt */; };
+		B5A3E21C2A68909D00A39617 /* DetailsImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E21B2A68909D00A39617 /* DetailsImageCell.swift */; };
+		B5A3E21E2A6890BB00A39617 /* DetailsDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E21D2A6890BB00A39617 /* DetailsDescriptionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,9 @@
 		B5A3E1D52A5E3DAE00A39617 /* VerticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalStackView.swift; sourceTree = "<group>"; };
 		B5A3E1D72A5E4FAD00A39617 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B5A3E2162A65E5E600A39617 /* ImageDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailsController.swift; sourceTree = "<group>"; };
+		B5A3E2182A688CFE00A39617 /* Notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Notes.txt; sourceTree = "<group>"; };
+		B5A3E21B2A68909D00A39617 /* DetailsImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsImageCell.swift; sourceTree = "<group>"; };
+		B5A3E21D2A6890BB00A39617 /* DetailsDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsDescriptionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +99,7 @@
 				B5A3E19C2A5B86F200A39617 /* View */,
 				B5A3E19A2A5B86D100A39617 /* Controller */,
 				B5A3E1D02A5E242D00A39617 /* Helpers */,
+				B5A3E2182A688CFE00A39617 /* Notes.txt */,
 				B5A3E1822A5B834000A39617 /* AppDelegate.swift */,
 				B5A3E1842A5B834000A39617 /* SceneDelegate.swift */,
 				B5A3E1882A5B834000A39617 /* Main.storyboard */,
@@ -125,6 +132,7 @@
 		B5A3E19C2A5B86F200A39617 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B5A3E21A2A68906D00A39617 /* Details */,
 				B5A3E19E2A5B875C00A39617 /* SearchResultsCell.swift */,
 				B5A3E1D52A5E3DAE00A39617 /* VerticalStackView.swift */,
 			);
@@ -145,6 +153,15 @@
 				B5A3E1D12A5E244A00A39617 /* Extensions.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B5A3E21A2A68906D00A39617 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				B5A3E21B2A68909D00A39617 /* DetailsImageCell.swift */,
+				B5A3E21D2A6890BB00A39617 /* DetailsDescriptionCell.swift */,
+			);
+			path = Details;
 			sourceTree = "<group>";
 		};
 		C8167FD003289A793C6636FC /* Frameworks */ = {
@@ -215,6 +232,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5A3E2192A688CFE00A39617 /* Notes.txt in Resources */,
 				B5A3E18F2A5B834300A39617 /* LaunchScreen.storyboard in Resources */,
 				B5A3E18C2A5B834300A39617 /* Assets.xcassets in Resources */,
 				B5A3E18A2A5B834000A39617 /* Main.storyboard in Resources */,
@@ -272,6 +290,8 @@
 			files = (
 				B5A3E19F2A5B875C00A39617 /* SearchResultsCell.swift in Sources */,
 				B5A3E1972A5B83E300A39617 /* BaseTabBarController.swift in Sources */,
+				B5A3E21E2A6890BB00A39617 /* DetailsDescriptionCell.swift in Sources */,
+				B5A3E21C2A68909D00A39617 /* DetailsImageCell.swift in Sources */,
 				B5A3E1D22A5E244A00A39617 /* Extensions.swift in Sources */,
 				B5A3E1992A5B85C700A39617 /* ImageSearchController.swift in Sources */,
 				B5A3E1D42A5E26A400A39617 /* Service.swift in Sources */,
