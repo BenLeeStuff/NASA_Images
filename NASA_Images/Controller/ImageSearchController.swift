@@ -7,10 +7,11 @@
 
 import UIKit
 import SDWebImage
+import CHTCollectionViewWaterfallLayout
 
 private let reuseIdentifier = "Cell"
 
-class ImageSearchController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
+class ImageSearchController: UICollectionViewController, CHTCollectionViewDelegateWaterfallLayout, UISearchBarDelegate {
     
     fileprivate var searchItems = [SearchItem]()
     fileprivate var imageGroups = [(imageTitle: String, imageData: SearchItem)]()
@@ -20,6 +21,10 @@ class ImageSearchController: UICollectionViewController, UICollectionViewDelegat
         super.viewDidLoad()
         self.setupSearchBar()
         self.collectionView!.register(SearchResultsCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        if let layout = collectionViewLayout as? CHTCollectionViewWaterfallLayout {
+            layout.columnCount = 2
+            layout.itemRenderDirection = .leftToRight
+        }
         self.fetchImages(searchTerm: "hubble")
     }
     
@@ -59,25 +64,35 @@ class ImageSearchController: UICollectionViewController, UICollectionViewDelegat
         let imageURL = URL(string: group.imageData.links?.first?.href ?? "none")
         cell.imageView.sd_setImage(with: imageURL)
         cell.titleLabel.text = group.imageTitle
-
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth = (view.frame.width/2) - 20
-        return .init(width: cellWidth, height: 320)
+        //let height = models[indexPath.item].imageHeight
+        
+        return .init(width: view.frame.size.width / 2, height: CGFloat.random(in: 200...400))
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: 10, left: 10, bottom: 10, right: 10)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let cellWidth = (view.frame.width/2)
+//        print("cellWidth: \(cellWidth)")
+//        return .init(width: cellWidth, height: 320)
+//    }
+    
+    
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        return .init(top: 10, left: 10, bottom: 10, right: 10)
+//    }
     
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Item Selected: \(indexPath.item)")
+        
         let imageGroup = imageGroups[indexPath.item]
-        let detailsController = ImageDetailsController()
-        navigationController?.pushViewController(ImageDetailsController(), animated: true)
+        let detailsController = DetailsController(imageGroup: imageGroup)
+        detailsController.imageGroup = imageGroup
+        navigationController?.pushViewController(detailsController, animated: true)
     }
     
     func fetchImages(searchTerm: String) {
@@ -125,7 +140,6 @@ class ImageSearchController: UICollectionViewController, UICollectionViewDelegat
             }
             print("------------------------------------")
         }
-        
     }
     
     fileprivate func populateByTitle() {
@@ -167,7 +181,7 @@ class ImageSearchController: UICollectionViewController, UICollectionViewDelegat
     
 
     init() {
-        super.init(collectionViewLayout: UICollectionViewFlowLayout())
+        super.init(collectionViewLayout: CHTCollectionViewWaterfallLayout())
     }
     
     required init?(coder: NSCoder) {

@@ -12,9 +12,10 @@ class SearchResultsCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let iv = UIImageView()
         iv.backgroundColor = .blue
-        iv.contentMode = .scaleAspectFit
+        iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = 10
         iv.clipsToBounds = true
+        iv.setContentHuggingPriority(.defaultLow, for: .vertical)
         return iv
     }()
     
@@ -34,7 +35,16 @@ class SearchResultsCell: UICollectionViewCell {
         let stackView = VerticalStackView(arrangedSubviews: [imageView, titleLabel])
         addSubview(stackView)
         stackView.fillSuperview()
-        
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageView.frame = contentView.bounds
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
     }
     
     // Using For dynamic resizing.

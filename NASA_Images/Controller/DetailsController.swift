@@ -7,35 +7,36 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "DetailsImageCell"
 
-class ImageDetailsController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class DetailsController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    var imageGroup: (imageTitle: String, imageData: SearchItem)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(DetailsImageCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.backgroundColor = .orange
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 4
+        return self.imageGroup?.imageData.data.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: self.collectionView.frame.width, height: self.collectionView.frame.height)
+        return .init(width: self.collectionView.frame.width, height: self.collectionView.frame.height * 2)
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-        cell.backgroundColor = .red
-        // Configure the cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! DetailsImageCell
     
+        cell.backgroundColor = .systemBlue
         return cell
     }
     
-    init() {
+    init(imageGroup: (imageTitle: String, imageData: SearchItem)) {
+        self.imageGroup = imageGroup
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
     

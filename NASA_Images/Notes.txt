@@ -2,4 +2,6 @@
 Next Tasks To Do:
 
 1. Dynamic height cell implementation.
+    - I've passed the imageGroup to the DetailsController in didSelectItemAt inside the SearchController'
+    - 
 

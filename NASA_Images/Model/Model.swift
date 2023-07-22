@@ -15,7 +15,6 @@ struct SearchCollection: Codable {
     let version: String
     let href: String
     let items: [SearchItem]
-
 }
 
 struct SearchItem: Codable {

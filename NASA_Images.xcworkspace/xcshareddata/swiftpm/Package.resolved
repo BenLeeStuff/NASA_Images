@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "chtcollectionviewwaterfalllayout",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AfrazCodes/CHTCollectionViewWaterfallLayout",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "669a2c7edbc4f32fd752f57be3de750a5c4a0a8c"
+      }
+    }
+  ],
+  "version" : 2
+}

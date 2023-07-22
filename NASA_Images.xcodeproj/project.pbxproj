@@ -21,10 +21,10 @@
 		B5A3E1D42A5E26A400A39617 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E1D32A5E26A400A39617 /* Service.swift */; };
 		B5A3E1D62A5E3DAE00A39617 /* VerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E1D52A5E3DAE00A39617 /* VerticalStackView.swift */; };
 		B5A3E1D82A5E4FAD00A39617 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E1D72A5E4FAD00A39617 /* Model.swift */; };
-		B5A3E2172A65E5E600A39617 /* ImageDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E2162A65E5E600A39617 /* ImageDetailsController.swift */; };
+		B5A3E2172A65E5E600A39617 /* DetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E2162A65E5E600A39617 /* DetailsController.swift */; };
 		B5A3E2192A688CFE00A39617 /* Notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = B5A3E2182A688CFE00A39617 /* Notes.txt */; };
 		B5A3E21C2A68909D00A39617 /* DetailsImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E21B2A68909D00A39617 /* DetailsImageCell.swift */; };
-		B5A3E21E2A6890BB00A39617 /* DetailsDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E21D2A6890BB00A39617 /* DetailsDescriptionCell.swift */; };
+		B5A3E2772A6A8B9A00A39617 /* CHTCollectionViewWaterfallLayout in Frameworks */ = {isa = PBXBuildFile; productRef = B5A3E2762A6A8B9A00A39617 /* CHTCollectionViewWaterfallLayout */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,10 +46,9 @@
 		B5A3E1D32A5E26A400A39617 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		B5A3E1D52A5E3DAE00A39617 /* VerticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalStackView.swift; sourceTree = "<group>"; };
 		B5A3E1D72A5E4FAD00A39617 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		B5A3E2162A65E5E600A39617 /* ImageDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailsController.swift; sourceTree = "<group>"; };
+		B5A3E2162A65E5E600A39617 /* DetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsController.swift; sourceTree = "<group>"; };
 		B5A3E2182A688CFE00A39617 /* Notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Notes.txt; sourceTree = "<group>"; };
 		B5A3E21B2A68909D00A39617 /* DetailsImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsImageCell.swift; sourceTree = "<group>"; };
-		B5A3E21D2A6890BB00A39617 /* DetailsDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsDescriptionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5A3E2772A6A8B9A00A39617 /* CHTCollectionViewWaterfallLayout in Frameworks */,
 				56542A3BBBBE36DD0701C686 /* Pods_NASA_Images.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -116,7 +116,7 @@
 			children = (
 				B5A3E1962A5B83E300A39617 /* BaseTabBarController.swift */,
 				B5A3E1982A5B85C700A39617 /* ImageSearchController.swift */,
-				B5A3E2162A65E5E600A39617 /* ImageDetailsController.swift */,
+				B5A3E2162A65E5E600A39617 /* DetailsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -159,7 +159,6 @@
 			isa = PBXGroup;
 			children = (
 				B5A3E21B2A68909D00A39617 /* DetailsImageCell.swift */,
-				B5A3E21D2A6890BB00A39617 /* DetailsDescriptionCell.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -190,6 +189,9 @@
 			dependencies = (
 			);
 			name = NASA_Images;
+			packageProductDependencies = (
+				B5A3E2762A6A8B9A00A39617 /* CHTCollectionViewWaterfallLayout */,
+			);
 			productName = NASA_Images;
 			productReference = B5A3E17F2A5B834000A39617 /* NASA_Images.app */;
 			productType = "com.apple.product-type.application";
@@ -218,6 +220,9 @@
 				Base,
 			);
 			mainGroup = B5A3E1762A5B834000A39617;
+			packageReferences = (
+				B5A3E2752A6A8B9A00A39617 /* XCRemoteSwiftPackageReference "CHTCollectionViewWaterfallLayout" */,
+			);
 			productRefGroup = B5A3E1802A5B834000A39617 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -290,14 +295,13 @@
 			files = (
 				B5A3E19F2A5B875C00A39617 /* SearchResultsCell.swift in Sources */,
 				B5A3E1972A5B83E300A39617 /* BaseTabBarController.swift in Sources */,
-				B5A3E21E2A6890BB00A39617 /* DetailsDescriptionCell.swift in Sources */,
 				B5A3E21C2A68909D00A39617 /* DetailsImageCell.swift in Sources */,
 				B5A3E1D22A5E244A00A39617 /* Extensions.swift in Sources */,
 				B5A3E1992A5B85C700A39617 /* ImageSearchController.swift in Sources */,
 				B5A3E1D42A5E26A400A39617 /* Service.swift in Sources */,
 				B5A3E1D82A5E4FAD00A39617 /* Model.swift in Sources */,
 				B5A3E1872A5B834000A39617 /* ViewController.swift in Sources */,
-				B5A3E2172A65E5E600A39617 /* ImageDetailsController.swift in Sources */,
+				B5A3E2172A65E5E600A39617 /* DetailsController.swift in Sources */,
 				B5A3E1832A5B834000A39617 /* AppDelegate.swift in Sources */,
 				B5A3E1852A5B834000A39617 /* SceneDelegate.swift in Sources */,
 				B5A3E1D62A5E3DAE00A39617 /* VerticalStackView.swift in Sources */,
@@ -520,6 +524,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B5A3E2752A6A8B9A00A39617 /* XCRemoteSwiftPackageReference "CHTCollectionViewWaterfallLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AfrazCodes/CHTCollectionViewWaterfallLayout";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B5A3E2762A6A8B9A00A39617 /* CHTCollectionViewWaterfallLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B5A3E2752A6A8B9A00A39617 /* XCRemoteSwiftPackageReference "CHTCollectionViewWaterfallLayout" */;
+			productName = CHTCollectionViewWaterfallLayout;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B5A3E1772A5B834000A39617 /* Project object */;
 }
