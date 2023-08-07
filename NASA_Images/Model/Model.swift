@@ -19,6 +19,7 @@ struct SearchCollection: Codable {
 
 struct SearchItem: Codable {
     let href: String
+    var height: CGFloat?
     var data: [SearchResult]
     var links: [SearchResultLink]?
 }
@@ -36,4 +37,23 @@ struct SearchResultLink: Codable {
     var href: String?
     var rel: String?
     var render: String?
+}
+
+struct ManifestCollectionResponse: Codable {
+    let collection: ManifestCollection
+}
+
+struct ManifestCollection: Codable {
+    let version: String
+    let href: String
+    var items: [ManifestItem]
+}
+
+struct ManifestItem: Codable {
+    var href: String
+}
+
+struct ImageData {
+    var href: String
+    var estimatedHeight: CGFloat
 }

@@ -11,23 +11,30 @@ import CHTCollectionViewWaterfallLayout
 
 private let reuseIdentifier = "Cell"
 
-class ImageSearchController: UICollectionViewController, CHTCollectionViewDelegateWaterfallLayout, UISearchBarDelegate {
+class ImageSearchController: UICollectionViewController,  UISearchBarDelegate, PinterestLayoutDelegate {
+    
+    
+    
     
     fileprivate var searchItems = [SearchItem]()
     fileprivate var imageGroups = [(imageTitle: String, imageData: SearchItem)]()
     fileprivate let searchContoller = UISearchController(searchResultsController: nil)
-    
+    fileprivate var thumbnailImageHeight: CGFloat = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let layout = collectionView?.collectionViewLayout as? PinterestLayout {
+          layout.delegate = self
+        }
+        
         self.setupSearchBar()
         self.collectionView!.register(SearchResultsCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        if let layout = collectionViewLayout as? CHTCollectionViewWaterfallLayout {
-            layout.columnCount = 2
-            layout.itemRenderDirection = .leftToRight
-        }
-        self.fetchImages(searchTerm: "hubble")
+        self.fetch(searchTerm: "Apollo 11")
+        //self.fetchImages(searchTerm: "Apollo 11")
+        //Service.shared.fetchImagesWithHeight()
     }
-    
+
     func setupSearchBar() {
         definesPresentationContext = true
         navigationItem.searchController = self.searchContoller
@@ -38,23 +45,53 @@ class ImageSearchController: UICollectionViewController, CHTCollectionViewDelega
     var timer: Timer?
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
         // need search throttling (delay)
         timer?.invalidate()
         
-        timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { (_) in
-            Service.shared.fetchImages(searchTerm: searchText) { response, error in
-                self.imageGroups = response
-                
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
-            }
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+            self.fetch(searchTerm: searchText)
         })
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.imageGroups.count
+    }
+    
+//    func collectionView(_ collectionView: UICollectionView, heightForItemAtIndexPath indexPath: IndexPath) -> CGFloat {
+//        let group = imageGroups[indexPath.item]
+//        let imageHeight = group.imageData.height ?? 4
+//        let title = group.imageTitle
+//
+//        let approxWidthOfTitleLabel = (collectionView.bounds.width/2) - 20
+//        let size = CGSize(width: approxWidthOfTitleLabel, height: 500)
+//        let estimatedFrame = NSString(string: title).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16)], context: nil)
+//
+//        let height = imageHeight + estimatedFrame.height
+//        return height
+//    }
+    
+    func collectionView(_ collectionView: UICollectionView, heightForItemAtIndexPath indexPath: IndexPath) -> CGFloat {
+
+        let group = imageGroups[indexPath.item]
+//        let title = group.imageTitle
+        let imageHeight = group.imageData.height ?? 0
+        
+        //let urlString = group.imageData.links?.first?.href ?? ""
+        //let targetWidth = (collectionView.bounds.width/2) - 20
+        
+        
+        
+        //print("imageHeight: \(imageHeight)")
+        
+        //let title = group.imageTitle
+//        let size = CGSize(width: targetWidth, height: 1000)
+//        let estimatedFrame = NSString(string: title).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16)], context: nil)
+//
+//        let estimatedTextHeight = estimatedFrame.height
+
+        return imageHeight
+        //return 0
+        
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -62,36 +99,21 @@ class ImageSearchController: UICollectionViewController, CHTCollectionViewDelega
         
         let group = imageGroups[indexPath.item]
         let imageURL = URL(string: group.imageData.links?.first?.href ?? "none")
+
         cell.imageView.sd_setImage(with: imageURL)
         cell.titleLabel.text = group.imageTitle
+        
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //let height = models[indexPath.item].imageHeight
-        
-        return .init(width: view.frame.size.width / 2, height: CGFloat.random(in: 200...400))
-    }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let cellWidth = (view.frame.width/2)
-//        print("cellWidth: \(cellWidth)")
-//        return .init(width: cellWidth, height: 320)
-//    }
-    
-    
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return .init(top: 10, left: 10, bottom: 10, right: 10)
-//    }
+
     
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Item Selected: \(indexPath.item)")
         
         let imageGroup = imageGroups[indexPath.item]
-        let detailsController = DetailsController(imageGroup: imageGroup)
-        detailsController.imageGroup = imageGroup
+        let detailsController = ImageDetailsViewController(imageGroup: imageGroup)
+        //detailsController.imageGroup = imageGroup
         navigationController?.pushViewController(detailsController, animated: true)
     }
     
@@ -108,7 +130,55 @@ class ImageSearchController: UICollectionViewController, CHTCollectionViewDelega
             }
             print("Finished fetching images from ImageSearchController")
         }
+        
+        //print("ImageGroupsCount: \(self.imageGroups.count)")
     }
+    
+    func fetch(searchTerm: String) {
+        var imageGroups: [(imageTitle: String, imageData: SearchItem)]?
+        let targetWidth = (self.collectionView.bounds.width/2) - 20
+        let dispatchGroup = DispatchGroup()
+        dispatchGroup.enter()
+        Service.shared.fetchImages(searchTerm: searchTerm) { groups, error in
+            
+            var imgGroups = groups
+            
+            for index in 0..<groups.count {
+                let group = groups[index]
+                let title = group.imageTitle
+                let size = CGSize(width: targetWidth, height: 1000)
+                let estimatedFrame = NSString(string: title).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16)], context: nil)
+
+                let estimatedTextHeight = estimatedFrame.height
+                let urlString = groups[index].imageData.links?.first?.href ?? ""
+                dispatchGroup.enter()
+                Service.shared.fetchHeight(targetWidth: targetWidth, urlString: urlString) { targetHeight in
+                    dispatchGroup.leave()
+                    //print("TargetHeightt: \(targetHeight)")
+                    imgGroups[index].imageData.height = targetHeight + estimatedTextHeight
+                    imageGroups = imgGroups
+                }
+            }
+            dispatchGroup.leave()
+        }
+
+        dispatchGroup.notify(queue: .main) {
+            print("Completed dispatch group task")
+            
+            if let groups = imageGroups {
+                self.imageGroups = groups
+
+                
+            }
+//            for group in self.imageGroups {
+//                print("Height: \(group.imageData.height)")
+//            }
+            
+            
+            self.collectionView.reloadData()
+        }
+    }
+    
     
 
     
@@ -179,9 +249,8 @@ class ImageSearchController: UICollectionViewController, CHTCollectionViewDelega
         }
     }
     
-
     init() {
-        super.init(collectionViewLayout: CHTCollectionViewWaterfallLayout())
+        super.init(collectionViewLayout: PinterestLayout())
     }
     
     required init?(coder: NSCoder) {

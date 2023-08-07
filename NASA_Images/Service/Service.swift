@@ -6,11 +6,14 @@
 //
 
 import Foundation
-
+import UIKit
 // creating a class for the service layer.
 
 class Service {
     static let shared = Service() // Singleton (Shared Intance)
+    
+    var imageHeight: CGFloat = 0
+    var imageGroups = [(imageTitle: String, imageData: SearchItem)]()
     
     func fetchMedia(searchTerm: String, completion: @escaping ([SearchItem], Error?) -> ()) {
         
@@ -52,6 +55,10 @@ class Service {
                         return !filteredData.isEmpty ? SearchItem(href: searchItem.href ,data: searchItem.data, links: links): nil
                     }
                     
+                    
+                    
+                    
+                    
                     // passing back the filtered items
                     completion(filteredItems, nil)
                     
@@ -63,7 +70,6 @@ class Service {
         }.resume()
     }
     
-   //[(imageTitle: String, imageData: SearchItem)]
     
     func fetchImages(searchTerm: String, completion: @escaping ([(imageTitle: String, imageData: SearchItem)], Error?) -> ()) {
         
@@ -110,10 +116,10 @@ class Service {
                     for item in filteredItems {
                         for data in item.data {
                             let title = data.title
-                            
                              //check if the key exists
                             if let index = resultsByTitleHolder.firstIndex(where: {$0.imageTitle == title}) {
                                 // key exists.
+                                
                                 resultsByTitleHolder[index].imageData.data.append(data)
                                 // append the data to the array
                             } else {
@@ -123,6 +129,7 @@ class Service {
                             }
                         }
                     }
+                    
                     // passing back the filtered and reorganized items
                     completion(resultsByTitleHolder, nil)
                     
@@ -134,29 +141,214 @@ class Service {
         }.resume()
     }
     
-//    fileprivate func populateByTitle() {
-//        var resultsByTitleHolder: [(imageTitle: String, imageData: SearchItem)] = []
+    func fetchImageHeight(targetWidth: CGFloat, urlString: String, completion: @escaping (CGFloat, Error?) -> ()) {
+        guard let url = URL(string: urlString) else {
+            print("Error: invaid URL")
+            return
+        }
+     
+
+        URLSession.shared.dataTask(with: url) { data, response, err in
+            if let err = err {
+                print("ERROR: Failed to fetch media: \(err)")
+            } else {
+                guard let data = data else { return }
+
+                do {
+                    
+                    guard let image = UIImage(data: data) else {return}
+                    let aspectRatio = image.size.height / image.size.width
+                    let targetHeight = targetWidth * aspectRatio
+                    print("TargetHeight: \(targetHeight)")
+                    completion(targetHeight, nil)
+                    
+                }
+            }
+        }.resume()
+    }
+    
+    func fetchHeight(targetWidth: CGFloat, urlString: String) -> CGFloat {
+        guard let url = URL(string: urlString) else {
+            print("Error: invaid URL")
+            return 0
+        }
+        //let dispatchGroup = DispatchGroup()
+
+        //lazy var height = CGFloat()
+        //dispatchGroup.enter()
+        URLSession.shared.dataTask(with: url) { data, response, err in
+            if let err = err {
+                print("ERROR: Failed to fetch media: \(err)")
+            } else {
+                guard let data = data else { return }
+
+                do {
+                    guard let image = UIImage(data: data) else {return}
+                    
+                    let aspectRatio = image.size.height / image.size.width
+                    let targetHeight = targetWidth * aspectRatio
+                    print("TargetHeight: \(targetHeight)")
+                    //dispatchGroup.leave()
+                    self.imageHeight = targetHeight
+                }
+            }
+        }.resume()
+        print("urlString: \(urlString)")
+        print("height: \(self.imageHeight)")
+        return self.imageHeight
+    }
+    
+    func fetchHeight(targetWidth: CGFloat, urlString: String, completion: @escaping (CGFloat) -> ()) {
+        guard let url = URL(string: urlString) else {
+            print("Error: invaid URL")
+            return
+        }
+        //let dispatchGroup = DispatchGroup()
+        //dispatchGroup.enter()
+        URLSession.shared.dataTask(with: url) { data, response, err in
+            if let err = err {
+                print("ERROR: Failed to fetch media: \(err)")
+            } else {
+                guard let data = data else { return }
+
+                do {
+                    guard let image = UIImage(data: data) else {return}
+                    
+                    let aspectRatio = image.size.height / image.size.width
+                    let targetHeight = targetWidth * aspectRatio
+                    //print("TargetHeightt: \(targetHeight)")
+                    //dispatchGroup.leave()
+                    //self.imageHeight = targetHeight
+                    completion(targetHeight)
+                }
+            }
+        }.resume()
+    }
+    
+//    func fetchManifest(nasa_id: String, completion: @escaping (ManifestCollection) -> ()) {
+//        let urlString =  "https://images-api.nasa.gov/asset/\(nasa_id)"
 //
-//        for item in searchItems {
-//            for data in item.data {
-//                let title = data.title
-//                
-//                 //check if the key exists
-//                if let index = resultsByTitleHolder.firstIndex(where: {$0.imageTitle == title}) {
-//                    // key exists.
-//                    resultsByTitleHolder[index].imageData.data.append(data)
-//                    // append the data to the array
-//                } else {
-//                    // key doesnt exist.
-//                    resultsByTitleHolder.append((imageTitle: title, imageData: item))
-//                    // create a new entry
+//        guard let url = URL(string: urlString) else {
+//            print("Error: invaid URL")
+//            return
+//        }
+//
+//        URLSession.shared.dataTask(with: url) { data, response, err in
+//            if let err = err {
+//                print("ERROR: Failed to fetch media: \(err)")
+//            } else {
+//                guard let data = data else { return }
+//
+//                let dataString = String(data: data, encoding: .utf8)
+//                print("  ")
+//                print(dataString)
+//                print("  ")
+//
+//                do {
+//                    let decoder = JSONDecoder()
+//                    let response = try decoder.decode(ManifestCollectionResponse.self, from: data)
+//                    let responseCollection = response.collection
+////                    let responseCollectionItems = responseCollection.items
+////                    for item in responseCollectionItems {
+////                        print("ITEM Href: ", item.href)
+////                    }
+//                    completion(responseCollection)
+//
+//                } catch let jsonErr {
+//                    print("Error failed to decode JSON: \(jsonErr)")
+//                }
+//            }
+//        }.resume()
+//    }
+//
+    func fetchManifest(nasa_id: String, completion: @escaping (ManifestCollection) -> ()) {
+        let urlString =  "https://images-api.nasa.gov/asset/\(nasa_id)"
+        
+        guard let url = URL(string: urlString) else {
+            print("Error: invaid URL")
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, err in
+            if let err = err {
+                print("ERROR: Failed to fetch media: \(err)")
+            } else {
+                guard let data = data else { return }
+                
+                let dataString = String(data: data, encoding: .utf8)
+//                print("  ")
+//                print(dataString)
+//                print("  ")
+
+                do {
+                    let decoder = JSONDecoder()
+                    let response = try decoder.decode(ManifestCollectionResponse.self, from: data)
+                    let responseCollection = response.collection
+//                    let responseCollectionItems = responseCollection.items
+//                    for item in responseCollectionItems {
+//                        print("ITEM Href: ", item.href)
+//                    }
+                    completion(responseCollection)
+                    
+                } catch let jsonErr {
+                    print("Error failed to decode JSON: \(jsonErr)")
+                }
+            }
+        }.resume()
+    }
+    
+    
+//    var validHrefs: [String] = []
+    
+    
+//    func fetchImageData(nasa_id: String, completion: @escaping (ImageData) -> ()) {
+//        let dispatchGroup = DispatchGroup()
+//        let suffixes = ["large.jpg", "medium.jpg", "small.jpg"]
+//        var validHrefs: [String]?
+//        
+//        
+//        dispatchGroup.enter()
+//        self.fetchManifest(nasa_id: nasa_id) { manifestCollection in
+//            dispatchGroup.leave()
+//            //validHrefs.removeAll() // clear any existing hrefs
+//
+//            let manifestItems = manifestCollection.items
+//            // find an appropriate url
+//            
+//            for item in manifestItems {
+////                print("item.href: \(item.href)")
+//                for suffix in suffixes {
+//                    if item.href.hasSuffix(suffix) {
+////                        print("Valid item.href; \(item.href)")
+////                        validHrefs?.append(item.href)
+//                        let imageData = ImageData(href: item.href, estimatedHeight: nil)
+//                        break
+//                        completion(imageData)
+//                    }
 //                }
 //            }
 //        }
 //        
-//        //self.imageGroups = resultsByTitleHolder
-//       // self.printImageGroupData()
+//        
+//        
+//        // need to get an estimated height
+////        dispatchGroup.enter()
+////        let targetWidth =  UIScreen.main.bounds.width
+////        self.fetchHeight(targetWidth: targetWidth, urlString: validHrefs.first!) { targetHeight in
+////            dispatchGroup.leave()
+////            imageData.estimatedHeight = targetHeight
+////            imageData.href = self.validHrefs.first!
+////        }
+//        
+//
+//        
 //    }
+    
+   
+    
+    
+
+    
 
 }
 

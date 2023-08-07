@@ -135,3 +135,22 @@ extension UIButton {
     }
 }
 
+//extension UILabel {
+//    func estimatedHeight(forText text: String, withFont font: UIFont, width: CGFloat) -> CGFloat {
+//        let size = CGSize(width: width, height: .greatestFiniteMagnitude)
+//        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+//        let attributes = [NSAttributedString.Key.font: font]
+//        let boundingRect = NSString(string: text).boundingRect(with: size, options: options, attributes: attributes, context: nil)
+//        return ceil(boundingRect.height)
+//    }
+//}
+
+extension UILabel {
+    func estimatedHeight(forText text: String, withFont font: UIFont, width: CGFloat) -> CGFloat {
+        let size = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        let attributes = [NSAttributedString.Key.font: font]
+        let boundingRect = NSString(string: text).boundingRect(with: size, options: options, attributes: attributes, context: nil)
+        return ceil(boundingRect.height)
+    }
+}
