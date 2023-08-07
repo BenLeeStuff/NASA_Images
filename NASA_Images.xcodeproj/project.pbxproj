@@ -27,7 +27,7 @@
 		B5A3E1D82A5E4FAD00A39617 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E1D72A5E4FAD00A39617 /* Model.swift */; };
 		B5A3E2172A65E5E600A39617 /* DetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E2162A65E5E600A39617 /* DetailsController.swift */; };
 		B5A3E2192A688CFE00A39617 /* Notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = B5A3E2182A688CFE00A39617 /* Notes.txt */; };
-		B5A3E21C2A68909D00A39617 /* PagingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E21B2A68909D00A39617 /* PagingCollectionViewCell.swift */; };
+		B5A3E21C2A68909D00A39617 /* DetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E21B2A68909D00A39617 /* DetailsCell.swift */; };
 		B5A3E2772A6A8B9A00A39617 /* CHTCollectionViewWaterfallLayout in Frameworks */ = {isa = PBXBuildFile; productRef = B5A3E2762A6A8B9A00A39617 /* CHTCollectionViewWaterfallLayout */; };
 		B5A3E2792A6CA7C800A39617 /* PinterestLayoutDelegae.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E2782A6CA7C800A39617 /* PinterestLayoutDelegae.swift */; };
 /* End PBXBuildFile section */
@@ -57,7 +57,7 @@
 		B5A3E1D72A5E4FAD00A39617 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B5A3E2162A65E5E600A39617 /* DetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsController.swift; sourceTree = "<group>"; };
 		B5A3E2182A688CFE00A39617 /* Notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Notes.txt; sourceTree = "<group>"; };
-		B5A3E21B2A68909D00A39617 /* PagingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingCollectionViewCell.swift; sourceTree = "<group>"; };
+		B5A3E21B2A68909D00A39617 /* DetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCell.swift; sourceTree = "<group>"; };
 		B5A3E2782A6CA7C800A39617 /* PinterestLayoutDelegae.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestLayoutDelegae.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -179,7 +179,7 @@
 		B5A3E21A2A68906D00A39617 /* Details */ = {
 			isa = PBXGroup;
 			children = (
-				B5A3E21B2A68909D00A39617 /* PagingCollectionViewCell.swift */,
+				B5A3E21B2A68909D00A39617 /* DetailsCell.swift */,
 				B53888542A794F5100EEFCE8 /* PagingDescriptionCell.swift */,
 				B53888522A794EF000EEFCE8 /* PagingImageCell.swift */,
 			);
@@ -319,7 +319,7 @@
 				B5A3E19F2A5B875C00A39617 /* SearchResultsCell.swift in Sources */,
 				B5A3E1972A5B83E300A39617 /* BaseTabBarController.swift in Sources */,
 				B53888552A794F5100EEFCE8 /* PagingDescriptionCell.swift in Sources */,
-				B5A3E21C2A68909D00A39617 /* PagingCollectionViewCell.swift in Sources */,
+				B5A3E21C2A68909D00A39617 /* DetailsCell.swift in Sources */,
 				B5A3E1D22A5E244A00A39617 /* Extensions.swift in Sources */,
 				B5A3E1992A5B85C700A39617 /* ImageSearchController.swift in Sources */,
 				B5A3E1D42A5E26A400A39617 /* Service.swift in Sources */,

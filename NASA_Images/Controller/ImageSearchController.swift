@@ -13,9 +13,6 @@ private let reuseIdentifier = "Cell"
 
 class ImageSearchController: UICollectionViewController,  UISearchBarDelegate, PinterestLayoutDelegate {
     
-    
-    
-    
     fileprivate var searchItems = [SearchItem]()
     fileprivate var imageGroups = [(imageTitle: String, imageData: SearchItem)]()
     fileprivate let searchContoller = UISearchController(searchResultsController: nil)
@@ -31,8 +28,7 @@ class ImageSearchController: UICollectionViewController,  UISearchBarDelegate, P
         self.setupSearchBar()
         self.collectionView!.register(SearchResultsCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.fetch(searchTerm: "Apollo 11")
-        //self.fetchImages(searchTerm: "Apollo 11")
-        //Service.shared.fetchImagesWithHeight()
+
     }
 
     func setupSearchBar() {
@@ -56,42 +52,12 @@ class ImageSearchController: UICollectionViewController,  UISearchBarDelegate, P
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.imageGroups.count
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, heightForItemAtIndexPath indexPath: IndexPath) -> CGFloat {
-//        let group = imageGroups[indexPath.item]
-//        let imageHeight = group.imageData.height ?? 4
-//        let title = group.imageTitle
-//
-//        let approxWidthOfTitleLabel = (collectionView.bounds.width/2) - 20
-//        let size = CGSize(width: approxWidthOfTitleLabel, height: 500)
-//        let estimatedFrame = NSString(string: title).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16)], context: nil)
-//
-//        let height = imageHeight + estimatedFrame.height
-//        return height
-//    }
-    
+
     func collectionView(_ collectionView: UICollectionView, heightForItemAtIndexPath indexPath: IndexPath) -> CGFloat {
 
         let group = imageGroups[indexPath.item]
-//        let title = group.imageTitle
         let imageHeight = group.imageData.height ?? 0
-        
-        //let urlString = group.imageData.links?.first?.href ?? ""
-        //let targetWidth = (collectionView.bounds.width/2) - 20
-        
-        
-        
-        //print("imageHeight: \(imageHeight)")
-        
-        //let title = group.imageTitle
-//        let size = CGSize(width: targetWidth, height: 1000)
-//        let estimatedFrame = NSString(string: title).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16)], context: nil)
-//
-//        let estimatedTextHeight = estimatedFrame.height
-
         return imageHeight
-        //return 0
-        
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -109,12 +75,16 @@ class ImageSearchController: UICollectionViewController,  UISearchBarDelegate, P
     
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Item Selected: \(indexPath.item)")
-        
         let imageGroup = imageGroups[indexPath.item]
-        let detailsController = ImageDetailsViewController(imageGroup: imageGroup)
-        //detailsController.imageGroup = imageGroup
-        navigationController?.pushViewController(detailsController, animated: true)
+        
+        print("Item Selected: \(indexPath.item)")
+        print(imageGroup.imageData)
+        print(" ")
+        print(imageGroup.imageData.data.first?.nasa_id)
+        
+        let detailsController = DetailsController(imageGroup: imageGroup)
+        present(detailsController, animated: true)
+
     }
     
     func fetchImages(searchTerm: String) {

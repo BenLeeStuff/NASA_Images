@@ -138,7 +138,6 @@ class ImageDetailsViewController: UIViewController, UICollectionViewDelegate, UI
         stackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 0).isActive = true
         stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0).isActive = true
         stackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0).isActive = true
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -3,5 +3,8 @@ Next Tasks To Do:
 
 1. Dynamic height cell implementation.
     - I've passed the imageGroup to the DetailsController in didSelectItemAt inside the SearchController'
-    - 
 
+- Need to write a fetch method to grab the imageUrls
+
+- Need to write a method to find the estimated height for the scroll view inside details cell
+    - imageView height + padding + titleLabel height + padding + descriptionLabel height + padding
