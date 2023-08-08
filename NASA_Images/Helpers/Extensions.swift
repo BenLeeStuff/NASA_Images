@@ -111,46 +111,5 @@ struct AnchoredConstraints {
     var top, leading, bottom, trailing, width, height: NSLayoutConstraint?
 }
 
-extension UILabel {
-    convenience init(text: String, font: UIFont) {
-        self.init(frame: .zero)
-        self.text = text
-        self.font = font
-    }
-}
 
-extension UIImageView {
-    convenience init(cornerRadius: CGFloat) {
-        self.init(image: nil)
-        self.layer.cornerRadius = cornerRadius
-        self.clipsToBounds = true
-        self.contentMode = .scaleAspectFill
-    }
-}
 
-extension UIButton {
-    convenience init(title: String) {
-        self.init(type: .system)
-        self.setTitle(title, for: .normal)
-    }
-}
-
-//extension UILabel {
-//    func estimatedHeight(forText text: String, withFont font: UIFont, width: CGFloat) -> CGFloat {
-//        let size = CGSize(width: width, height: .greatestFiniteMagnitude)
-//        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-//        let attributes = [NSAttributedString.Key.font: font]
-//        let boundingRect = NSString(string: text).boundingRect(with: size, options: options, attributes: attributes, context: nil)
-//        return ceil(boundingRect.height)
-//    }
-//}
-
-extension UILabel {
-    func estimatedHeight(forText text: String, withFont font: UIFont, width: CGFloat) -> CGFloat {
-        let size = CGSize(width: width, height: .greatestFiniteMagnitude)
-        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-        let attributes = [NSAttributedString.Key.font: font]
-        let boundingRect = NSString(string: text).boundingRect(with: size, options: options, attributes: attributes, context: nil)
-        return ceil(boundingRect.height)
-    }
-}

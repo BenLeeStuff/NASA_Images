@@ -24,10 +24,8 @@ class DetailsController: UICollectionViewController, UICollectionViewDelegateFlo
             layout.minimumLineSpacing = 0
             layout.minimumInteritemSpacing = 0
         }
-        
         self.collectionView.isPagingEnabled = true
         self.collectionView.register(DetailsCell.self, forCellWithReuseIdentifier: detailsCellId)
-        
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -39,7 +37,6 @@ class DetailsController: UICollectionViewController, UICollectionViewDelegateFlo
         return .init(width: self.collectionView.bounds.width, height: self.collectionView.bounds.height)
     }
     
-    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: detailsCellId, for: indexPath) as! DetailsCell
         
@@ -47,10 +44,10 @@ class DetailsController: UICollectionViewController, UICollectionViewDelegateFlo
             return cell}
         let imageData = group.imageData.data[indexPath.item]
         let nasa_id = imageData.nasa_id
-        let imageURLString = "https://images-assets.nasa.gov/image/\(nasa_id)/\(nasa_id)~thumb.jpg"
+        let urlString = "https://images-assets.nasa.gov/image/\(nasa_id)/\(nasa_id)~thumb.jpg"
 
-        guard let imageURL = URL(string: imageURLString) else {
-            print("Invalid URL in details controller for cell")
+        guard let imageURL = URL(string: urlString) else {
+            print("Invalid URL with: \(urlString)")
             return cell
         }
         cell.numberLabel.text = "\(indexPath.item + 1)/\(group.imageData.data.count)"
@@ -65,15 +62,11 @@ class DetailsController: UICollectionViewController, UICollectionViewDelegateFlo
             let imageData = group.imageData.data[indexPath.item]
             print(imageData.nasa_id)
         }
-        
-        print("item: \(indexPath.item), section: \(indexPath.section), row: \(indexPath.row)")
     }
     
     init(imageGroup: (imageTitle: String, imageData: SearchItem)) {
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
         self.imageGroup = imageGroup
-
-        //print(imageGroup.imageData)
     }
     
     required init?(coder: NSCoder) {

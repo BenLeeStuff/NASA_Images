@@ -9,7 +9,6 @@ import UIKit
 
 class BaseTabBarController: UITabBarController {
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .init(white: 0.2, alpha: 1)
@@ -25,7 +24,6 @@ class BaseTabBarController: UITabBarController {
         viewController.navigationItem.title = title
         navController.tabBarItem.title = title
         navController.tabBarItem.image = UIImage(systemName: imageName)
-        //navController.navigationBar.prefersLargeTitles = true
         return navController
     }
 

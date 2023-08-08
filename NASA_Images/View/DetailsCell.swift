@@ -28,9 +28,8 @@ class DetailsCell: UICollectionViewCell {
             descriptionLabel.constrainHeight(constant: descriptionLabelHeight)
             descriptionLabel.text = searchResult.description
             
-            let imageHeight = Service.shared.estimatedHeightForResult(searchResult: searchResult)
+            let imageHeight = Service.shared.estimatedImageHeightForResult(searchResult: searchResult)
             imageView.constrainHeight(constant: imageHeight)
-            //layoutIfNeeded()
         }
     }
     
@@ -103,16 +102,11 @@ class DetailsCell: UICollectionViewCell {
         scrollView.addSubview(stackView)
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        //stackView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 40).isActive = true
         stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0).isActive = true
         stackView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 0).isActive = true
         stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0).isActive = true
         stackView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0).isActive = true
-        
-//        addSubview(numberLabel)
-//        numberLabel.anchor(top: topAnchor, leading: nil, bottom: nil, trailing: trailingAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 20))
-
     }
     
     func estimatedHeightForLabel(text: String, font: UIFont, width: CGFloat) -> CGFloat {

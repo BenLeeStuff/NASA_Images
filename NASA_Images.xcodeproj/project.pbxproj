@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		56542A3BBBBE36DD0701C686 /* Pods_NASA_Images.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C49246EDC82E6B8A371F403 /* Pods_NASA_Images.framework */; };
-		B53888532A794EF000EEFCE8 /* PagingImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53888522A794EF000EEFCE8 /* PagingImageCell.swift */; };
-		B53888552A794F5100EEFCE8 /* PagingDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53888542A794F5100EEFCE8 /* PagingDescriptionCell.swift */; };
-		B53888572A7B582400EEFCE8 /* ImageDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53888562A7B582400EEFCE8 /* ImageDetailsViewController.swift */; };
 		B55A0F202A7432950052F75B /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55A0F1F2A7432950052F75B /* PinterestLayout.swift */; };
 		B5A3E1832A5B834000A39617 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E1822A5B834000A39617 /* AppDelegate.swift */; };
 		B5A3E1852A5B834000A39617 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E1842A5B834000A39617 /* SceneDelegate.swift */; };
@@ -29,16 +26,12 @@
 		B5A3E2192A688CFE00A39617 /* Notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = B5A3E2182A688CFE00A39617 /* Notes.txt */; };
 		B5A3E21C2A68909D00A39617 /* DetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E21B2A68909D00A39617 /* DetailsCell.swift */; };
 		B5A3E2772A6A8B9A00A39617 /* CHTCollectionViewWaterfallLayout in Frameworks */ = {isa = PBXBuildFile; productRef = B5A3E2762A6A8B9A00A39617 /* CHTCollectionViewWaterfallLayout */; };
-		B5A3E2792A6CA7C800A39617 /* PinterestLayoutDelegae.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A3E2782A6CA7C800A39617 /* PinterestLayoutDelegae.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C49246EDC82E6B8A371F403 /* Pods_NASA_Images.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NASA_Images.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		391173878203512C0E1F313A /* Pods-NASA_Images.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NASA_Images.release.xcconfig"; path = "Target Support Files/Pods-NASA_Images/Pods-NASA_Images.release.xcconfig"; sourceTree = "<group>"; };
 		89E1507C0EF8EFE8F02AE923 /* Pods-NASA_Images.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NASA_Images.debug.xcconfig"; path = "Target Support Files/Pods-NASA_Images/Pods-NASA_Images.debug.xcconfig"; sourceTree = "<group>"; };
-		B53888522A794EF000EEFCE8 /* PagingImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingImageCell.swift; sourceTree = "<group>"; };
-		B53888542A794F5100EEFCE8 /* PagingDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingDescriptionCell.swift; sourceTree = "<group>"; };
-		B53888562A7B582400EEFCE8 /* ImageDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailsViewController.swift; sourceTree = "<group>"; };
 		B55A0F1F2A7432950052F75B /* PinterestLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
 		B5A3E17F2A5B834000A39617 /* NASA_Images.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NASA_Images.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A3E1822A5B834000A39617 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,7 +51,6 @@
 		B5A3E2162A65E5E600A39617 /* DetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsController.swift; sourceTree = "<group>"; };
 		B5A3E2182A688CFE00A39617 /* Notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Notes.txt; sourceTree = "<group>"; };
 		B5A3E21B2A68909D00A39617 /* DetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCell.swift; sourceTree = "<group>"; };
-		B5A3E2782A6CA7C800A39617 /* PinterestLayoutDelegae.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestLayoutDelegae.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,14 +75,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		B55A0F1E2A7432820052F75B /* Layouts */ = {
-			isa = PBXGroup;
-			children = (
-				B55A0F1F2A7432950052F75B /* PinterestLayout.swift */,
-			);
-			path = Layouts;
-			sourceTree = "<group>";
-		};
 		B5A3E1762A5B834000A39617 = {
 			isa = PBXGroup;
 			children = (
@@ -112,7 +96,6 @@
 		B5A3E1812A5B834000A39617 /* NASA_Images */ = {
 			isa = PBXGroup;
 			children = (
-				B55A0F1E2A7432820052F75B /* Layouts */,
 				B5A3E19D2A5B871900A39617 /* Service */,
 				B5A3E19B2A5B86DA00A39617 /* Model */,
 				B5A3E19C2A5B86F200A39617 /* View */,
@@ -136,7 +119,6 @@
 				B5A3E1962A5B83E300A39617 /* BaseTabBarController.swift */,
 				B5A3E1982A5B85C700A39617 /* ImageSearchController.swift */,
 				B5A3E2162A65E5E600A39617 /* DetailsController.swift */,
-				B53888562A7B582400EEFCE8 /* ImageDetailsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -152,7 +134,7 @@
 		B5A3E19C2A5B86F200A39617 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B5A3E21A2A68906D00A39617 /* Details */,
+				B5A3E21B2A68909D00A39617 /* DetailsCell.swift */,
 				B5A3E19E2A5B875C00A39617 /* SearchResultsCell.swift */,
 				B5A3E1D52A5E3DAE00A39617 /* VerticalStackView.swift */,
 			);
@@ -170,20 +152,10 @@
 		B5A3E1D02A5E242D00A39617 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				B55A0F1F2A7432950052F75B /* PinterestLayout.swift */,
 				B5A3E1D12A5E244A00A39617 /* Extensions.swift */,
-				B5A3E2782A6CA7C800A39617 /* PinterestLayoutDelegae.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		B5A3E21A2A68906D00A39617 /* Details */ = {
-			isa = PBXGroup;
-			children = (
-				B5A3E21B2A68909D00A39617 /* DetailsCell.swift */,
-				B53888542A794F5100EEFCE8 /* PagingDescriptionCell.swift */,
-				B53888522A794EF000EEFCE8 /* PagingImageCell.swift */,
-			);
-			path = Details;
 			sourceTree = "<group>";
 		};
 		C8167FD003289A793C6636FC /* Frameworks */ = {
@@ -318,7 +290,6 @@
 			files = (
 				B5A3E19F2A5B875C00A39617 /* SearchResultsCell.swift in Sources */,
 				B5A3E1972A5B83E300A39617 /* BaseTabBarController.swift in Sources */,
-				B53888552A794F5100EEFCE8 /* PagingDescriptionCell.swift in Sources */,
 				B5A3E21C2A68909D00A39617 /* DetailsCell.swift in Sources */,
 				B5A3E1D22A5E244A00A39617 /* Extensions.swift in Sources */,
 				B5A3E1992A5B85C700A39617 /* ImageSearchController.swift in Sources */,
@@ -326,13 +297,10 @@
 				B5A3E1D82A5E4FAD00A39617 /* Model.swift in Sources */,
 				B5A3E1872A5B834000A39617 /* ViewController.swift in Sources */,
 				B5A3E2172A65E5E600A39617 /* DetailsController.swift in Sources */,
-				B53888532A794EF000EEFCE8 /* PagingImageCell.swift in Sources */,
 				B5A3E1832A5B834000A39617 /* AppDelegate.swift in Sources */,
 				B55A0F202A7432950052F75B /* PinterestLayout.swift in Sources */,
 				B5A3E1852A5B834000A39617 /* SceneDelegate.swift in Sources */,
 				B5A3E1D62A5E3DAE00A39617 /* VerticalStackView.swift in Sources */,
-				B5A3E2792A6CA7C800A39617 /* PinterestLayoutDelegae.swift in Sources */,
-				B53888572A7B582400EEFCE8 /* ImageDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

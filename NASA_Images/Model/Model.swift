@@ -39,21 +39,3 @@ struct SearchResultLink: Codable {
     var render: String?
 }
 
-struct ManifestCollectionResponse: Codable {
-    let collection: ManifestCollection
-}
-
-struct ManifestCollection: Codable {
-    let version: String
-    let href: String
-    var items: [ManifestItem]
-}
-
-struct ManifestItem: Codable {
-    var href: String
-}
-
-struct ImageData {
-    var href: String
-    var estimatedHeight: CGFloat
-}
